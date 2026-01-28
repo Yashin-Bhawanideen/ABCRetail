@@ -1,0 +1,10 @@
+{
+  "description": {
+    "language": "dotnet-isolated",
+    "extensions": [ ".dll" ],
+    "defaultExecutablePath": "dotnet",
+    "defaultWorkerPath": "ABC_Retail.dll",
+    "workerIndexing": "true",
+    "canUsePlaceholder": true
+  }
+}

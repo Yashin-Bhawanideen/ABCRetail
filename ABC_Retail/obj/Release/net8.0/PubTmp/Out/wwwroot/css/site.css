@@ -1,0 +1,252 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+ 
+}
+
+.RegisterForm {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    top: 190px;
+    left: 460px;
+    border: 1px solid #ccc;
+    /*    border-radius: 10px;*/
+    box-shadow: 0 4px 8px rgb(123, 20, 14, 1);
+    width: 40%;
+    height: 55%;
+}
+
+.LoginForm {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    top: 190px;
+    left: 460px;
+    border: 1px solid #ccc;
+    /*    border-radius: 10px;*/
+    box-shadow: 0 4px 8px rgb(123, 20, 14, 1);
+    width: 40%;
+    height: 50%;
+}
+.registerBtn {
+    
+    display: inline-block;
+    padding: 9px 10px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+outline: none;
+}
+.registeredBtn {
+    display: inline-block;
+    padding: 9px 15px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+    
+}
+.loginBtn {
+    display: inline-block;
+    padding: 9px 15px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+/*this layout is to wrap the images next to each other*/
+.product-list {
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap; /*wraps to the next line if needed*/
+    gap: 30px; /*space between products*/
+    /* justify-content: flex-start; shifts the images to the left*/
+    justify-content: center; /*shifts the images to the left*/
+}
+
+/*this ensures that the border is around each image or creates that border*/
+.product-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 250px; /*Fixed width for each product card*/
+    box-shadow: 0 10px 10px rgba(78,177,206,255);
+    text-align: center;
+    background-color: #fff;
+}
+    /*this adjusts the image size to fit prefectly*/
+    .product-item img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover; /*Ensures image fits nicely */
+        display: block;
+        margin: 0 auto;
+    }
+.addBtn {
+    display: inline-block;
+    padding: 8px 10px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+.supportBtn {
+    display: inline-block;
+    padding: 8px 10px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+.addToCartBtn {
+    display: inline-block;
+    padding: 9px 9px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.questionsBtn {
+    display: inline-block;
+    padding: 9px 10px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.contractBtn {
+    display: inline-block;
+    padding: 8px 10px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.homeIndex {
+    left: 0px;
+    top: 57px;
+    position: absolute;
+    background-color: lightskyblue;
+    height: 500px;
+    width: 1524px;
+}
+
+.homeAccount {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    top: 600px;
+    left: 180px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(123, 20, 14, 1);
+    width: 23%;
+    height: 40%;
+    font-size: 25px;
+}
+
+.homeProduct {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    top: 600px;
+    left: 570px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(123, 20, 14, 1);
+    width: 23%;
+    height: 40%;
+    font-size: 25px;
+}
+
+.homeCart {
+    color: black;
+    position: absolute;
+    padding: 10px;
+    top: 600px;
+    right: 210px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(123, 20, 14, 1);
+    width: 23%;
+    height: 40%;
+    font-size: 25px;
+}
+.accountBtn {
+    /*    margin top moves the button down (if value is negative it moves up) */
+    margin-top: 0px;
+    /*    margin left moves the button right (if value is negative it moves left) */
+    margin-left: 105px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.productBtn {
+    /*    margin top moves the button down (if value is negative it moves up) */
+    margin-top: 35px;
+    /*    margin left moves the button right (if value is negative it moves left) */
+    margin-left: 105px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.cartBtn {
+    /*    margin top moves the button down (if value is negative it moves up) */
+    margin-top: 35px;
+    /*    margin left moves the button right (if value is negative it moves left) */
+    margin-left: 105px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 20px;
+}

@@ -1,0 +1,268 @@
+﻿@model List<ABC_Retail.Models.ProductModel>
+@{
+    ViewData["Title"] = "Our Products";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-5">Our Products</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Product Grid -->
+    <div class="row g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card product-card h-100">
+                    <div class="product-image-container">
+                        <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name"
+                             onerror="this.src='https://via.placeholder.com/300x300?text=Image+Not+Found'">
+                        <div class="product-overlay">
+                            <a href="/Cart/Add/@product.Id" class="btn btn-primary btn-add-cart">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title product-name">@product.Name</h5>
+                        <div class="product-price-section mt-auto">
+                            <p class="card-text product-price">R @product.Price.ToString("N2")</p>
+                            <a href="/Cart/Add/@product.Id" class="btn btn-outline-primary btn-sm w-100 d-lg-none">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Empty State -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5">
+            <div class="empty-products-icon mb-3">🛍️</div>
+            <h3 class="text-muted">No Products Available</h3>
+            <p class="text-muted">Check back later for new products</p>
+        </div>
+    }
+
+    <!-- Navigation Links -->
+    <div class="text-center mt-5">
+        <div class="btn-group" role="group">
+            <a href="/Cart/Index" class="btn btn-info">
+                <i class="fas fa-shopping-cart"></i> View Cart (@Model?.Count ?? 0)
+            </a>
+            <a href="/Bot/Index" class="btn btn-outline-info">
+                <i class="fas fa-question-circle"></i> Customer Support
+            </a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/Product/Create" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add New Product
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+    .product-image-container {
+        position: relative;
+        overflow: hidden;
+        background: #f8f9fa;
+        height: 250px;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 300px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+        display: block;
+        margin: 20px auto 0 auto; /* top: 20px, right: auto, bottom: 0, left: auto */
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .product-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .product-overlay {
+        opacity: 1;
+    }
+
+    .btn-add-cart {
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .btn-add-cart {
+        transform: translateY(0);
+    }
+
+    .product-name {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        min-height: 3rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #e74c3c;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-price-section {
+        border-top: 1px solid #e9ecef;
+        padding-top: 1rem;
+    }
+
+    .empty-products-icon {
+        font-size: 4rem;
+        opacity: 0.5;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+        padding: 10px 20px;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0056b3, #004085);
+            transform: translateY(-2px);
+        }
+
+    .btn-outline-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Responsive adjustments
+    @@media (max-width: 768px) {
+        .product-overlay {
+            display: none;
+        }
+
+        .product-image {
+            height: 200px;
+        }
+
+        .col-sm-12 {
+            margin-bottom: 1.5rem;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Add to cart with confirmation
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.btn-add-cart, .btn-outline-primary');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    const productPrice = this.closest('.product-card').querySelector('.product-price').textContent;
+
+                    if (!confirm(`Add ${productName} to cart for ${productPrice}?`)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Add animation to product cards on load
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('fade-in-up');
+            });
+        });
+    </script>
+
+    <style>
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+}
+
+@*
+References
+ForeverNoobie, 2015. How to have a simple .html page in Asp.net MVC. [Online]
+Available at: https://stackoverflow.com/questions/28964848/how-to-have-a-simple-html-page-in-asp-net-mvc
+Microsoft, 2022. Creating Custom HTML Helpers (C#). [Online]
+Available at: https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs
+Panda, A., 2014. Creating Custom HTML Helpers in MVC. [Online]
+Available at: https://www.c-sharpcorner.com/blogs/creating-custom-html-helpers-in-mvc
+*@

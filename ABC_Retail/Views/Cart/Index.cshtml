@@ -1,0 +1,80 @@
+﻿@model List<ABC_Retail.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Your Shopping Cart</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5">
+            <h3 class="text-muted">Your cart is empty</h3>
+            <p class="text-muted">Add some products to get started!</p>
+            <a href="/Product/Index" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-8">
+                @foreach (var item in Model)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                @* <div class="col-md-3">
+                                    <img src="@item.ImageUrl" class="img-fluid rounded" alt="@item.Name" style="height: 120px; object-fit: cover;">
+                                </div> *@
+                                <div class="col-md-6">
+                                    <h5>@item.Name</h5>
+                                    <p class="text-muted">Price: R @item.Price.ToString("N2")</p>
+                                    <p>Quantity: @item.Quantity</p>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <p class="fw-bold">Total: R @item.TotalPrice.ToString("N2")</p>
+                                    <form asp-action="Remove" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="cartItemId" value="@item.CartId" />
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Order Summary</h5>
+                        <hr>
+                        <p>Items: @Model.Count</p>
+                        <p>Total Quantity: @Model.Sum(item => item.Quantity)</p>
+                        <h4>Grand Total: R @Model.Sum(item => item.TotalPrice).ToString("N2")</h4>
+
+                        <div class="d-grid gap-2 mt-3">
+                            <a href="/Product/Index" class="btn btn-outline-primary">Continue Shopping</a>
+                            <form asp-action="Clear" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-outline-danger w-100">Clear Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

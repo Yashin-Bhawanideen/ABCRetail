@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Customer Support";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">ABC Customer Support</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Index" asp-controller="Bot" method="post">
+                        <div class="form-group mb-3">
+                            <label for="question" class="form-label"><strong>Your Question:</strong></label>
+                            <input type="text" class="form-control" id="question" name="question"
+                                   placeholder="Enter your question about orders, shipping, returns, or payments" required />
+                            <div class="form-text">Try keywords like: order, shipping, return, payment</div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Question</button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.Question != null)
+                    {
+                        <div class="mt-4">
+                            <hr />
+                            <h4 class="text-primary">Customer Support Response:</h4>
+                            <div class="alert alert-info">
+                                <strong>Your Question:</strong> "@ViewBag.Question"<br><br>
+                                <strong>Answer:</strong> @ViewBag.Response
+                            </div>
+                        </div>
+                    }
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success mt-3">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- FAQ Suggestions -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Frequently Asked Questions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>• <strong>Order:</strong> Track your order status</li>
+                                <li>• <strong>Shipping:</strong> Delivery information</li>
+                                <li>• <strong>Return:</strong> Return policy details</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>• <strong>Payment:</strong> Accepted payment methods</li>
+                                <li>• <strong>Payment Options:</strong> Payment gateway info</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+    .form-control {
+        padding: 12px;
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        font-size: 16px;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    .alert-info {
+        border-left: 4px solid #17a2b8;
+    }
+</style>
+
+@*
+References
+ForeverNoobie, 2015. How to have a simple .html page in Asp.net MVC. [Online]
+Available at: https://stackoverflow.com/questions/28964848/how-to-have-a-simple-html-page-in-asp-net-mvc
+Microsoft, 2022. Creating Custom HTML Helpers (C#). [Online]
+Available at: https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs
+Panda, A., 2014. Creating Custom HTML Helpers in MVC. [Online]
+Available at: https://www.c-sharpcorner.com/blogs/creating-custom-html-helpers-in-mvc
+*@

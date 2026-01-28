@@ -1,0 +1,82 @@
+﻿@model List<ABC_Retail.Models.FileModel>
+@{
+    ViewData["Title"] = "My Contracts";
+}
+
+<h2>Contract Documents</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<!-- Upload Form -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Upload New Contract</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select Document (Max 10MB):</label>
+                <input type="file" name="file" class="form-control" required
+                       accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Upload Document</button>
+        </form>
+    </div>
+</div>
+
+<!-- Contracts List -->
+@if (Model.Any())
+{
+    <div class="card">
+        <div class="card-header">
+            <h5>Uploaded Contracts</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>File Size</th>
+                        <th>Uploaded Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contract in Model)
+                    {
+                        <tr>
+                            <td>@contract.DocumentName</td>
+                            <td>@contract.FileSizeDisplay</td>
+                            <td>@contract.UploadedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>
+                                <a href="@Url.Action("Download", new { contractId = contract.ContractId })"
+                                   class="btn btn-sm btn-success">Download</a>
+
+                                <form asp-action="Delete" method="post" style="display: inline;">
+                                    <input type="hidden" name="contractId" value="@contract.ContractId" />
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this document?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">No contracts uploaded yet.</div>
+}
