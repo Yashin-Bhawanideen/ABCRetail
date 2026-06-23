@@ -1,5 +1,5 @@
 # ABCRetail
-Retail Store that sells items to clients. This e-commerce website handles customer orders, paymenst and delivery notifications. The customer can browser the various products to add to their carts.
+Retail Store that sells items to clients. This e-commerce website handles customer orders, paymenst and delivery notifications. The customer can browser the various products to add to their carts. The user will need to login/register to their own account to view the products in their cart and proceed to pay.
 
 The product page
 
